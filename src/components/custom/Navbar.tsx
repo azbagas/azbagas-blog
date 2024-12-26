@@ -77,7 +77,7 @@ const Navbar = () => {
             >
               <SheetHeader>
                 <SheetTitle>Menu</SheetTitle>
-                <SheetDescription>Where are you going?</SheetDescription>
+                <SheetDescription>Where do you want to go?</SheetDescription>
               </SheetHeader>
               <div className="flex flex-col gap-4 p-4">
                 {menus.map((menu) => (

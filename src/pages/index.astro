@@ -1,10 +1,32 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import '@/styles/globals.css';
+import { Image } from 'astro:assets';
+import azbagasPhoto from '../assets/images/azbagas-photo.jpg';
 ---
 
 <BaseLayout pageTitle="AzBagas – Personal Blog">
-	<div>
-		Hello
-	</div>
+  <section
+    class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 xl:px-12 mt-10 sm:mt-20 lg:mt-28"
+  >
+    <div>
+      <h1 class="text-4xl lg:text-5xl font-bold">Hello, I'm Bagas.</h1>
+      <p class="mt-6 text-lg">
+        I'm a backend developer based in Indonesia. <br
+          class="hidden sm:block"
+        />
+        Explore my <a href="/projects" class="font-semibold underline"
+          >previous projects</a
+        > or discover more <a href="/about" class="font-semibold underline"
+          >about me</a
+        >.
+      </p>
+    </div>
+    <div class="flex justify-center mt-6 sm:mt-0">
+      <Image
+        src={azbagasPhoto}
+        alt="Azbagas photo"
+        class="rounded-lg w-48 lg:w-60 xl:mr-16"
+      />
+    </div>
+  </section>
 </BaseLayout>
