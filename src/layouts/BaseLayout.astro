@@ -1,5 +1,7 @@
 ---
 import Navbar from '@/components/custom/Navbar';
+
+const { pageTitle } = Astro.props;
 ---
 
 <script is:inline>
@@ -32,7 +34,7 @@ import Navbar from '@/components/custom/Navbar';
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <title>AzBagas – Personal Blog</title>
+    <title>{pageTitle}</title>
   </head>
   <body>
     <Navbar client:load />
