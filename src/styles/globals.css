@@ -64,3 +64,8 @@
     @apply bg-background text-foreground;
   }
 }
+@layer components {
+  .custom-container {
+    @apply container mx-auto px-6 lg:px-36
+  }
+}
