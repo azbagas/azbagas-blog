@@ -1,0 +1,18 @@
+[
+  {
+    "title": "jQuery",
+    "classLogo": "devicon-jquery-plain"
+  },
+  {
+    "title": "React",
+    "classLogo": "devicon-react-original"
+  },
+  {
+    "title": "Tailwind",
+    "classLogo": "devicon-tailwindcss-original"
+  },
+  {
+    "title": "Astro",
+    "classLogo": "devicon-astro-plain"
+  }
+]

@@ -65,7 +65,7 @@
   }
 }
 @layer components {
-  .custom-container {
-    @apply container mx-auto px-6 lg:px-36
+  .overall-container {
+    @apply container mx-auto px-6 sm:px-16 md:px-28 lg:px-52 xl:px-72;
   }
 }

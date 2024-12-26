@@ -1,16 +1,21 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { Image } from 'astro:assets';
-import azbagasPhoto from '../assets/images/azbagas-photo.jpg';
+import azbagasPhoto from '@/assets/images/azbagas-photo.jpg';
+import Separator from '@/components/custom/Separator';
+import skillBackendLogos from '@/assets/skills/skillBackendLogos.json';
+import skillFrontendLogos from '@/assets/skills/skillFrontendLogos.json';
+import skillToolLogos from '@/assets/skills/skillToolLogos.json';
+import SkillSection from '@/components/custom/SkillSection';
 ---
 
 <BaseLayout pageTitle="AzBagas – Personal Blog">
   <section
-    class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 xl:px-12 mt-10 sm:mt-20 lg:mt-28"
+    class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mt-10 sm:mt-20 lg:mt-28"
   >
     <div>
       <h1 class="text-4xl lg:text-5xl font-bold">Hello, I'm Bagas.</h1>
-      <p class="mt-6 text-lg">
+      <p class="mt-6">
         I'm a backend developer based in Indonesia. <br
           class="hidden sm:block"
         />
@@ -25,8 +30,24 @@ import azbagasPhoto from '../assets/images/azbagas-photo.jpg';
       <Image
         src={azbagasPhoto}
         alt="Azbagas photo"
-        class="rounded-lg w-48 lg:w-60 xl:mr-16"
+        class="rounded-lg w-48 lg:w-60"
       />
     </div>
   </section>
+  <Separator />
+  <section>
+    <h2 class="text-xl font-bold">My Skills</h2>
+    <p class="text-muted-foreground">
+      Here are the skills I've mastered along my journey.
+    </p>
+
+    <SkillSection title="Backend" skills={skillBackendLogos} />
+    <SkillSection
+      title="Frontend"
+      description="Although frontend development isn't my main area of expertise, I have a basic understanding and some experience in building the client side (including this personal website ^_^)."
+      skills={skillFrontendLogos}
+    />
+    <SkillSection title="Tools and Platforms" skills={skillToolLogos} />
+  </section>
+  <Separator />
 </BaseLayout>

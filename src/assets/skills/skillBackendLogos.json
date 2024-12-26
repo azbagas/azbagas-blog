@@ -1,0 +1,26 @@
+[
+  {
+    "title": "TypeScript",
+    "classLogo": "devicon-typescript-plain"
+  },
+  {
+    "title": "Node.js",
+    "classLogo": "devicon-nodejs-plain"
+  },
+  {
+    "title": "Express.js",
+    "classLogo": "devicon-express-original"
+  },
+  {
+    "title": "Laravel",
+    "classLogo": "devicon-laravel-original"
+  },
+  {
+    "title": "MySQL",
+    "classLogo": "devicon-mysql-original"
+  },
+  {
+    "title": "MongoDB",
+    "classLogo": "devicon-mongodb-plain"
+  }
+]
