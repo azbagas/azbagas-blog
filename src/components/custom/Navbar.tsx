@@ -26,12 +26,12 @@ const menus: { title: string; href: string }[] = [
     href: '/',
   },
   {
-    title: 'Blog',
-    href: '/blog',
-  },
-  {
     title: 'Projects',
     href: '/projects',
+  },
+  {
+    title: 'Blog',
+    href: '/blog',
   },
   {
     title: 'About',
