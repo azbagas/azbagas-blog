@@ -1,0 +1,19 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { Image } from 'astro:assets';
+import { formatDate } from '@/utils';
+const { frontmatter } = Astro.props;
+---
+
+<BaseLayout pageTitle={frontmatter.title}>
+  <article class="prose dark:prose-invert mx-auto mt-6 mb-8">
+    <p>{formatDate(frontmatter.publishedDate)}</p>
+    <h1>{frontmatter.title}</h1>
+    <Image
+      src={frontmatter.featuredImage}
+      alt={frontmatter.title}
+      class="rounded-lg mb-2"
+    />
+    <slot />
+  </article>
+</BaseLayout>

@@ -1,0 +1,50 @@
+---
+import {
+  Card,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+  CardFooter,
+} from '@/components/ui/card';
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+import { generateExcerpt, formatDate } from '@/utils';
+
+const posts = await getCollection('posts');
+// Sort the posts by date
+posts.sort(
+  (a, b) => b.data.publishedDate.getTime() - a.data.publishedDate.getTime()
+);
+---
+
+<div class="grid gap-6 mt-4">
+  {
+    posts.map((post) => (
+      <Card>
+        <CardHeader className="flex flex-col sm:flex-row gap-4">
+          <div class="sm:max-w-48">
+            <Image
+              src={post.data.featuredImage}
+              alt={post.data.title}
+              class="rounded-lg h-full object-cover"
+            />
+          </div>
+          <div>
+            <CardTitle className="text-lg leading-6 mb-2">
+              {post.data.title}
+            </CardTitle>
+            <CardDescription>
+              {generateExcerpt(post.body || post.data.title)}
+            </CardDescription>
+            <p class="text-muted-foreground text-sm pt-3 font-medium">
+              Published on {formatDate(post.data.publishedDate)}
+            </p>
+            <a href={`blog/${post.id}`} class="text-blue-500 hover:underline mt-3 block text-right">
+              Read more →
+            </a>
+          </div>
+        </CardHeader>
+      </Card>
+    ))
+  }
+</div>

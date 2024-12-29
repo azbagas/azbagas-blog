@@ -1,0 +1,13 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PostList from '@/components/custom/PostList.astro';
+import PageHeading from '@/components/custom/PageHeading.astro';
+---
+
+<BaseLayout pageTitle="AzBagas – Personal Blog">
+  <PageHeading
+    title="All Posts"
+    description="Here are all the posts I've written."
+  />
+  <PostList />
+</BaseLayout>
