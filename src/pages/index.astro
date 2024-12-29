@@ -7,6 +7,7 @@ import skillBackendLogos from '@/assets/skills/skillBackendLogos.json';
 import skillToolLogos from '@/assets/skills/skillToolLogos.json';
 import SkillSection from '@/components/custom/SkillSection';
 import ProjectList from '@/components/custom/ProjectList.astro';
+import SectionHeading from '@/components/custom/SectionHeading.astro';
 ---
 
 <BaseLayout pageTitle="AzBagas – Personal Blog">
@@ -36,20 +37,21 @@ import ProjectList from '@/components/custom/ProjectList.astro';
   </section>
   <Separator />
   <section>
-    <h2 class="text-xl font-bold">My Skills</h2>
-    <p class="text-muted-foreground">
-      Here are the skills I've mastered along my journey.
-    </p>
+    <SectionHeading
+      title="My Skills"
+      description="Here are the skills I've mastered along my journey."
+    />
 
     <SkillSection title="Backend" skills={skillBackendLogos} />
     <SkillSection title="Tools and Platforms" skills={skillToolLogos} />
   </section>
   <Separator />
   <section>
-    <h2 class="text-xl font-bold">Recent Projects</h2>
-    <p class="text-muted-foreground">
-      Here are the latest projects I've worked on.
-    </p>
+    <SectionHeading
+      title="Recent Projects"
+      description="Here are the latest projects I've worked on."
+    />
+    
     <ProjectList />
   </section>
   <Separator />
