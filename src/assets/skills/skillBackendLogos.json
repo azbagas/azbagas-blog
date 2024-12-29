@@ -4,12 +4,12 @@
     "classLogo": "devicon-typescript-plain"
   },
   {
-    "title": "Node.js",
-    "classLogo": "devicon-nodejs-plain"
-  },
-  {
     "title": "Express.js",
     "classLogo": "devicon-express-original"
+  },
+  {
+    "title": "PHP",
+    "classLogo": "devicon-php-plain"
   },
   {
     "title": "Laravel",
