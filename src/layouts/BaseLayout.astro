@@ -1,5 +1,6 @@
 ---
 import Navbar from '@/components/custom/Navbar';
+import Footer from '@/components/custom/Footer.astro';
 import '@/styles/globals.css';
 const { pageTitle } = Astro.props;
 ---
@@ -45,5 +46,7 @@ const { pageTitle } = Astro.props;
 		<main class="overall-container">
 			<slot />
 		</main>
+
+    <Footer />
   </body>
 </html>

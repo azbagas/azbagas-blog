@@ -1,0 +1,31 @@
+---
+import { Icon } from 'astro-icon/components';
+import SocialIcon from './SocialIcon.astro';
+const currentYear = new Date().getFullYear();
+---
+
+<footer
+  class="overall-container mb-8 mt-32 flex flex-col sm:flex-row sm:justify-between gap-4"
+>
+  <!-- Contact -->
+  <div class="text-2xl flex justify-center gap-6">
+    <!-- mdi for material design icon -->
+    <SocialIcon link="mailto:azharbagaskara1@gmail.com">
+      <Icon name="mdi:email" />
+    </SocialIcon>
+    <SocialIcon link="https://github.com/azbagas">
+      <Icon name="mdi:github" />
+    </SocialIcon>
+    <SocialIcon link="https://www.linkedin.com/in/azhar-bagaskara/">
+      <Icon name="mdi:linkedin" />
+    </SocialIcon>
+    <SocialIcon link="https://www.facebook.com/profile.php?id=100008209996672">
+      <Icon name="mdi:facebook" />
+    </SocialIcon>
+  </div>
+
+  <!-- Copyright -->
+  <div class="text-center text-sm text-muted-foreground sm:order-first">
+    <span>&copy {currentYear} | Azhar Bagaskara</span>
+  </div>
+</footer>
