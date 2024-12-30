@@ -16,6 +16,7 @@ import {
   NavigationMenuList,
   navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu';
+import { useState, useEffect } from 'react';
 
 import { AlignJustify } from 'lucide-react';
 import { ModeToggle } from './ModeToggle';
@@ -40,8 +41,31 @@ const menus: { title: string; href: string }[] = [
 ];
 
 const Navbar = () => {
+  const [currentPath, setCurrentPath] = useState<string>('');
+  const [isScrolled, setIsScrolled] = useState<boolean>(false);
+
+  useEffect(() => {
+    setCurrentPath(window.location.pathname);
+
+    if (window.scrollY > 20) {
+      setIsScrolled(true);
+    }
+
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    // Cleanup listener on unmount
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
-    <nav className="custom-container py-8 sticky top-0 bg-background">
+    <nav className={`custom-container py-4 sticky top-0 bg-background/70 backdrop-blur-xl box-content  ${
+        isScrolled ? 'md:border-x-[1px] border-b-[1px] md:rounded-b-lg' : ''}`}>
       <div className="flex justify-between items-center">
         {/* Logo */}
         <div>azbagas</div>
@@ -49,12 +73,16 @@ const Navbar = () => {
         <div className="flex gap-4 items-center">
           {/* Desktop Navigation */}
           <NavigationMenu className="gap-4">
-            <NavigationMenuList className="flex-col hidden sm:flex-row sm:flex">
+            <NavigationMenuList className="flex-col hidden sm:flex-row sm:flex gap-2">
               {menus.map((menu) => (
                 <NavigationMenuItem key={menu.title}>
                   <NavigationMenuLink
                     href={menu.href}
-                    className={navigationMenuTriggerStyle()}
+                    className={`hover:text-secondary-foreground py-3 rounded-lg px-4 font-medium text-sm  ${
+                      currentPath === menu.href
+                        ? 'text-secondary-foreground'
+                        : 'text-muted-foreground'
+                    }`}
                   >
                     {menu.title}
                   </NavigationMenuLink>
