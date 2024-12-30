@@ -20,31 +20,35 @@ posts.sort(
 <div class="grid gap-6 mt-4">
   {
     posts.map((post) => (
-      <Card>
-        <CardHeader className="flex flex-col sm:flex-row gap-4">
-          <div class="sm:max-w-48">
-            <Image
-              src={post.data.featuredImage}
-              alt={post.data.title}
-              class="rounded-lg h-full object-cover"
-            />
-          </div>
-          <div>
-            <CardTitle className="text-lg leading-6 mb-2">
-              {post.data.title}
-            </CardTitle>
-            <CardDescription>
-              {generateExcerpt(post.body || post.data.title)}
-            </CardDescription>
-            <p class="text-muted-foreground text-sm pt-3 font-medium">
-              Published on {formatDate(post.data.publishedDate)}
-            </p>
-            <a href={`blog/${post.id}`} class="text-blue-500 hover:underline mt-3 block text-right">
-              Read more →
-            </a>
-          </div>
-        </CardHeader>
-      </Card>
+      <a href={`blog/${post.id}`} class="group">
+        <Card>
+          <CardHeader className="flex flex-col sm:flex-row gap-4">
+            <div class="sm:max-w-48">
+              <Image
+                src={post.data.featuredImage}
+                alt={post.data.title}
+                class="rounded-lg h-full object-cover"
+              />
+            </div>
+            <div>
+              <CardTitle className="text-lg leading-6 mb-2">
+                {post.data.title}
+              </CardTitle>
+              <CardDescription>
+                {generateExcerpt(post.body || post.data.title)}
+              </CardDescription>
+              <p class="text-muted-foreground text-sm pt-3 font-medium">
+                Published on {formatDate(post.data.publishedDate)}
+              </p>
+              <span
+                class="text-blue-500 group-hover:underline mt-3 block text-right"
+              >
+                Read more →
+              </span>
+            </div>
+          </CardHeader>
+        </Card>
+      </a>
     ))
   }
 </div>
