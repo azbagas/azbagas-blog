@@ -14,12 +14,16 @@ import {
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-  navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu';
 import { useState, useEffect } from 'react';
 
 import { AlignJustify } from 'lucide-react';
 import { ModeToggle } from './ModeToggle';
+
+import azbagasLogoFullWhite from '@/assets/images/azbagas-logo-full-white.svg';
+import azbagasLogoFullBlack from '@/assets/images/azbagas-logo-full-black.svg';
+import azbagasLogoOnlyWhite from '@/assets/images/azbagas-logo-only-white.svg';
+import azbagasLogoOnlyBlack from '@/assets/images/azbagas-logo-only-black.svg';
 
 const menus: { title: string; href: string }[] = [
   {
@@ -43,6 +47,22 @@ const menus: { title: string; href: string }[] = [
 const Navbar = () => {
   const [currentPath, setCurrentPath] = useState<string>('');
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
+  const [theme, setThemeState] = useState<'theme-light' | 'dark' | 'system'>(
+    'theme-light'
+  );
+
+  useEffect(() => {
+    const isDarkMode = document.documentElement.classList.contains('dark');
+    setThemeState(isDarkMode ? 'dark' : 'theme-light');
+  }, []);
+
+  useEffect(() => {
+    const isDark =
+      theme === 'dark' ||
+      (theme === 'system' &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches);
+    document.documentElement.classList[isDark ? 'add' : 'remove']('dark');
+  }, [theme]);
 
   useEffect(() => {
     setCurrentPath(window.location.pathname);
@@ -64,11 +84,31 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className={`custom-container py-4 sticky top-0 bg-background/70 backdrop-blur-xl box-content  ${
-        isScrolled ? 'md:border-x-[1px] border-b-[1px] md:rounded-b-lg' : ''}`}>
+    <nav
+      className={`custom-container py-4 sticky top-0 bg-background/70 backdrop-blur-xl box-content  ${
+        isScrolled ? 'md:border-x-[1px] border-b-[1px] md:rounded-b-lg' : ''
+      }`}
+    >
       <div className="flex justify-between items-center">
         {/* Logo */}
-        <div>azbagas</div>
+        <a href="/">
+          <img
+            src={
+              theme == 'dark'
+                ? azbagasLogoFullWhite.src
+                : azbagasLogoFullBlack.src
+            }
+            className="w-28 hidden sm:block"
+          ></img>
+          <img
+            src={
+              theme == 'dark'
+                ? azbagasLogoOnlyWhite.src
+                : azbagasLogoOnlyBlack.src
+            }
+            className="w-10 block sm:hidden"
+          ></img>
+        </a>
 
         <div className="flex gap-4 items-center">
           {/* Desktop Navigation */}
@@ -92,7 +132,7 @@ const Navbar = () => {
           </NavigationMenu>
 
           {/* Dark Mode */}
-          <ModeToggle></ModeToggle>
+          <ModeToggle theme={theme} setThemeState={setThemeState}></ModeToggle>
 
           {/* Mobile Menu Sheet */}
           <Sheet>
