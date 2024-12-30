@@ -41,7 +41,7 @@ const menus: { title: string; href: string }[] = [
 
 const Navbar = () => {
   return (
-    <nav className="overall-container py-8 sticky top-0 bg-background">
+    <nav className="custom-container py-8 sticky top-0 bg-background">
       <div className="flex justify-between items-center">
         {/* Logo */}
         <div>azbagas</div>

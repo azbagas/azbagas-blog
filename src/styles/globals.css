@@ -65,7 +65,7 @@
   }
 }
 @layer components {
-  .overall-container {
-    @apply container mx-auto px-6 sm:px-16 md:px-28 lg:px-52 xl:px-72 2xl:px-96;
+  .custom-container {
+    @apply max-w-3xl mx-auto px-6;
   }
 }

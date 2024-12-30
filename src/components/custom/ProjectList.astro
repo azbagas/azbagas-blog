@@ -14,7 +14,7 @@ const projects = await getCollection('projects');
 projects.sort((a, b) => b.data.completedDate.getTime() - a.data.completedDate.getTime());
 ---
 
-<div class="grid lg:grid-cols-2 gap-6 mt-4">
+<div class="grid md:grid-cols-2 gap-6 mt-4">
   {
     projects.map((project) => (
       <Card>
