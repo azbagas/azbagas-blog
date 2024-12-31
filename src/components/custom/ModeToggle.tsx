@@ -1,12 +1,25 @@
 import { Moon, Sun } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useEffect, useState } from 'react';
 
-interface Props {
-  theme: 'theme-light' | 'dark' | 'system';
-  setThemeState: (theme: 'theme-light' | 'dark' | 'system') => void;
-}
+export function ModeToggle() {
+  const [theme, setThemeState] = useState<'theme-light' | 'dark' | 'system'>(
+    'theme-light'
+  );
 
-export function ModeToggle({ theme, setThemeState }: Props) {
+  useEffect(() => {
+    const isDarkMode = document.documentElement.classList.contains('dark');
+    setThemeState(isDarkMode ? 'dark' : 'theme-light');
+  }, []);
+
+  useEffect(() => {
+    const isDark =
+      theme === 'dark' ||
+      (theme === 'system' &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches);
+    document.documentElement.classList[isDark ? 'add' : 'remove']('dark');
+  }, [theme]);
+
   return (
     <Button
       variant="ghost"
