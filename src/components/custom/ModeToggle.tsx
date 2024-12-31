@@ -9,7 +9,7 @@ interface Props {
 export function ModeToggle({ theme, setThemeState }: Props) {
   return (
     <Button
-      variant="outline"
+      variant="ghost"
       size="icon"
       onClick={() => setThemeState(theme == 'dark' ? 'theme-light' : 'dark')}
     >
