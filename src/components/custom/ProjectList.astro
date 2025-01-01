@@ -4,40 +4,39 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-  // CardFooter,
+  CardFooter,
 } from '@/components/ui/card';
 import { getCollection } from 'astro:content';
 import { Image } from 'astro:assets';
 
 const projects = await getCollection('projects');
 // Sort the projects by date
-projects.sort((a, b) => b.data.completedDate.getTime() - a.data.completedDate.getTime());
+projects.sort(
+  (a, b) => b.data.completedDate.getTime() - a.data.completedDate.getTime()
+);
 ---
 
 <div class="grid md:grid-cols-2 gap-6 mt-4">
   {
     projects.map((project) => (
-      <Card>
-        <CardHeader>
-          <Image
-            src={project.data.featuredImage}
-            alt={project.data.title}
-            class="rounded-lg mb-2"
-          />
-          <CardTitle className="text-lg leading-6">
-            {project.data.title}
-          </CardTitle>
-          <CardDescription>{project.data.description}</CardDescription>
-        </CardHeader>
-        {/* <CardFooter>
-          <a
-            href={`projects/${project.id}`}
-            class="text-blue-500 hover:underline"
-          >
-            Read more
-          </a>
-        </CardFooter> */}
-      </Card>
+      <a href={`projects/${project.id}`} class="group">
+        <Card className="h-full flex flex-col">
+          <CardHeader>
+            <Image
+              src={project.data.featuredImage}
+              alt={project.data.title}
+              class="rounded-lg mb-2"
+            />
+            <CardTitle className="text-lg leading-6">
+              {project.data.title}
+            </CardTitle>
+            <CardDescription>{project.data.description}</CardDescription>
+          </CardHeader>
+          <CardFooter className="justify-end mt-auto">
+            <p class="text-blue-500 group-hover:underline">Explore →</p>
+          </CardFooter>
+        </Card>
+      </a>
     ))
   }
 </div>
