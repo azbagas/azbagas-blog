@@ -1,0 +1,76 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHeading from '@/components/custom/PageHeading.astro';
+import azbagasPhoto from '@/assets/images/azbagas-photo.jpg';
+
+import { Image } from 'astro:assets';
+---
+
+<BaseLayout pageTitle="AzBagas – Personal Blog">
+  <PageHeading
+    title="About Me"
+    description="A brief explanation about myself."
+  />
+
+  <section class="mt-8">
+    <Image
+      src={azbagasPhoto}
+      alt="Azbagas photo"
+      class="rounded-lg w-48 lg:w-60 mx-auto"
+    />
+    <article class="mt-8 prose dark:prose-invert max-w-none">
+      <p>Hello!</p>
+      <p>
+        My name is <span class="font-semibold">Azhar Bagaskara</span>, but you
+        can call me <span class="font-semibold">Bagas</span>. I am a Computer
+        Science student at Universitas Gadjah Mada.
+      </p>
+      <p>
+        I have a passion for software engineering, especially the backend side.
+        Over the past few years, I have worked on several <a href="/projects"
+          >projects</a
+        > involving technologies such as PHP, Laravel, TypeScript, Express.JS, Docker,
+        MySQL, and Google Cloud. One of my favorite aspects of backend development
+        is creating the business logic while ensuring systems are efficient and maintainable.
+      </p>
+      <p>
+        Throughout college, I have gained a strong foundation to support my
+        backend skills, including knowledge in Data Structures and Algorithms,
+        Algorithm and Complexity Analysis, Databases, Computer Networks,
+        Cryptography and Information Security, and Scalable Software
+        Development.
+      </p>
+      <p>
+        In my free time, I like reading books, watching anime, and playing video
+        games. These activities help me stay balanced and inspired.
+      </p>
+      <h3>Contact</h3>
+      <p>
+        If you have any questions or just want to say hello, please don't
+        hesitate to contact me. I'll get back to you soon!
+      </p>
+      <ul>
+        <li>
+          Email: <a target="_blank" href="mailto:azharbagaskara1@gmail.com"
+            >azharbagaskara1@gmail.com</a>
+        </li>
+        <li>
+          GitHub: <a target="_blank" href="https://github.com/azbagas"
+            >azbagas</a>
+        </li>
+        <li>
+          LinkedIn: <a
+            target="_blank"
+            href="https://www.linkedin.com/in/azhar-bagaskara/"
+            >Azhar Bagaskara</a>
+        </li>
+        <li>
+          Facebook: <a
+            target="_blank"
+            href="https://www.facebook.com/profile.php?id=100008209996672"
+            >Azhar Bagaskara</a>
+        </li>
+      </ul>
+    </article>
+  </section>
+</BaseLayout>
