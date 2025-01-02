@@ -1,0 +1,19 @@
+---
+import SkillLogo from '@/components/custom/SkillLogo.astro';
+import type { Skill } from '@/data/skills';
+
+interface Props {
+  skills: Skill[];
+}
+
+const { skills } = Astro.props;
+---
+
+<div class="flex flex-wrap gap-2 sm:gap-3 mt-2">
+  {
+    skills &&
+      skills.map((skill) => (
+        <SkillLogo classLogo={skill.class} title={skill.name} />
+      ))
+  }
+</div>

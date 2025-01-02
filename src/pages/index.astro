@@ -3,8 +3,8 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import { Image } from 'astro:assets';
 import azbagasPhoto from '@/assets/images/azbagas-photo.jpg';
 import Separator from '@/components/custom/Separator.astro';
-import { allSkills } from '@/data/skills';
-import SkillSection from '@/components/custom/SkillSection.astro';
+import { featuredBackendSkills, featuredToolsSkills } from '@/data/skills';
+import SkillList from '@/components/custom/SkillList.astro';
 import ProjectList from '@/components/custom/ProjectList.astro';
 import SectionHeading from '@/components/custom/SectionHeading.astro';
 import PostList from '@/components/custom/PostList.astro';
@@ -20,9 +20,9 @@ import PostList from '@/components/custom/PostList.astro';
         I'm a Computer Science student based in Indonesia. <br
           class="hidden sm:block"
         />
-        I'm passionate about <span class="font-semibold">backend engineering</span>. <br
-          class="hidden sm:block"
-        />
+        I'm passionate about <span class="font-semibold"
+          >backend engineering</span
+        >. <br class="hidden sm:block" />
         <p class="mt-4">
           Explore my <a href="/projects" class="font-semibold underline"
             >previous projects</a
@@ -47,8 +47,10 @@ import PostList from '@/components/custom/PostList.astro';
       description="Here are the skills I've mastered along my journey."
     />
 
-    <SkillSection title="Backend" skills={allSkills.backend} />
-    <SkillSection title="Tools and Platforms" skills={allSkills.tools} />
+    <h3 class="text-lg font-semibold mt-8">Backend</h3>
+    <SkillList skills={featuredBackendSkills} />
+    <h3 class="text-lg font-semibold mt-8">Tools and Platforms</h3>
+    <SkillList skills={featuredToolsSkills} />
   </section>
   <Separator />
   <section>
