@@ -1,10 +1,11 @@
 ---
 import SkillLogo from '@/components/custom/SkillLogo.astro';
+import type { Skill } from '@/data/skills';
 
 interface Props {
   title: string;
   description?: string;
-  skills: { title: string; classLogo: string }[];
+  skills: Skill[];
 }
 
 const { title, description, skills } = Astro.props;
@@ -14,8 +15,8 @@ const { title, description, skills } = Astro.props;
 <p class="text-muted-foreground text-sm">{description}</p>
 <div class="flex flex-wrap gap-2 sm:gap-3 mt-2">
   {
-    skills.map((skill) => (
-      <SkillLogo title={skill.title} classLogo={skill.classLogo} />
+    skills && skills.map(skill => (
+      <SkillLogo classLogo={skill.class} title={skill.name} />
     ))
   }
 </div>
