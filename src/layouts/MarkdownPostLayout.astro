@@ -6,7 +6,7 @@ const { frontmatter } = Astro.props;
 ---
 
 <BaseLayout pageTitle={`${frontmatter.title} - AzBagas`}>
-  <article class="prose dark:prose-invert mx-auto mt-6 mb-8">
+  <article class="prose dark:prose-invert mx-auto mt-10">
     <p>{formatDate(frontmatter.publishedDate)}</p>
     <h1>{frontmatter.title}</h1>
     <Image
