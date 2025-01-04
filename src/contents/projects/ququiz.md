@@ -64,7 +64,7 @@ Unit testing conducted verifies several aspects, namely, ensures that the notifi
 
 #### 2. Email Testing
 
-This email testing aims to ensure the SMTP server receives the email successfully. This testing uses an email delivery platform, namely [Mailtrap.io](Mailtrap.io). In Mailtrap, we can also see the form of the email sent. The following is an example of an email that has been sent in Mailtrap:
+This email testing aims to ensure the SMTP server receives the email successfully. This testing uses an email delivery platform, namely [Mailtrap.io](https://mailtrap.io/). In Mailtrap, we can also see the form of the email sent. The following is an example of an email that has been sent in Mailtrap:
 
 ![QuQuiz email screenshot](../../assets/images/projects/ququiz-email-screenshot.png 'QuQuiz email screenshot')
 
