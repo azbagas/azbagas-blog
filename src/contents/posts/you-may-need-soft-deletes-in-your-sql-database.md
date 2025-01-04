@@ -20,7 +20,7 @@ Based on the solutions above, of course, we don’t want them. It’s because th
 
 ## What is Soft Delete?
 
-Soft delete is a database technique that marks records as removed without actually removing them from the database. Instead of permanently erasing data, we used a flag or separate column to signal that a record has been “deleted” or is no longer active. With this technique, we can overcome the previous problem by maintaining reference integrity because the record still exists.
+Soft delete is a database technique that marks records as removed without actually removing them from the database. Instead of permanently erasing data, we used a flag or separate column to signal that a record has been “deleted” or is no longer active[^1]. With this technique, we can overcome the previous problem by maintaining reference integrity because the record still exists.
 
 ## Implementation
 
@@ -56,7 +56,7 @@ Besides maintaining the reference integrity, there are other advantages of using
 
 ### Cons
 
-1. **High complexity**. The soft delete can increase the query complexity because we must add a filter only to include records with the deleted_at column null. If you don’t add the filter, you can expose the deleted records. Some application frameworks have already handled this issue, such as Laravel, with its eloquent.
+1. **High complexity**. The soft delete can increase the query complexity because we must add a filter only to include records with the deleted_at column null. If you don’t add the filter, you can expose the deleted records. Some application frameworks have already handled this issue, such as Laravel, with its eloquent[^2].
 2. **Need more storage**. Because data is not physically deleted, the database size can continue to grow over time. This may result in higher storage needs and slower query performance, particularly for tables containing large volumes of data.
 3. **Data leakage**. If access rights management or querying are not working properly, data that is no longer relevant or sensitive may still be accidentally accessed.
 
@@ -66,5 +66,5 @@ Based on the discussion above, using soft deletes can solve our initial problem 
 
 ## References
 
-- https://bun.uptrace.dev/guide/soft-deletes.html
-- https://laravel.com/docs/11.x/eloquent#soft-deleting
+[^1]: https://bun.uptrace.dev/guide/soft-deletes.html
+[^2]: https://laravel.com/docs/11.x/eloquent#soft-deleting
