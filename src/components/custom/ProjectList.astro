@@ -12,7 +12,7 @@ import { Image } from 'astro:assets';
 const projects = await getCollection('projects');
 // Sort the projects by date
 projects.sort(
-  (a, b) => b.data.completedDate.getTime() - a.data.completedDate.getTime()
+  (a, b) => b.data.endDate.getTime() - a.data.endDate.getTime()
 );
 ---
 

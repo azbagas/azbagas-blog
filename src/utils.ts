@@ -9,6 +9,13 @@ export const formatDate = (date: Date) => {
   });
 };
 
+export const formatDateMonth = (date: Date) => {
+  return date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+  });
+};
+
 export const generateExcerpt = (content: string, length = 100) => {
   const renderedContent = parser.render(content);
   const plainText = renderedContent.replace(/(<([^>]+)>)/gi, ''); // Remove HTML tags

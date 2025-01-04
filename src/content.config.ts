@@ -7,9 +7,12 @@ const projects = defineCollection({
     z.object({
       title: z.string(),
       description: z.string(),
+      role: z.string(),
       featuredImage: image(),
       status: z.enum(['Public', 'Private']),
-      completedDate: z.date(),
+      technologies: z.array(z.string()),
+      startDate: z.date(),
+      endDate: z.date(),
     }),
 });
 

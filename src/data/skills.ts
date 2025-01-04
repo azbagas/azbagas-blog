@@ -7,6 +7,11 @@ export type Skill = {
 export const skills: Skill[] = [
   // Backend
   {
+    id: 'nodejs',
+    name: 'Node.js',
+    class: 'devicon-nodejs-plain',
+  },
+  {
     id: 'typescript',
     name: 'TypeScript',
     class: 'devicon-typescript-plain',
@@ -35,6 +40,11 @@ export const skills: Skill[] = [
     id: 'mongodb',
     name: 'MongoDB',
     class: 'devicon-mongodb-plain',
+  },
+  {
+    id: 'rabbitmq',
+    name: 'RabbitMQ',
+    class: 'devicon-rabbitmq-original',
   },
   // Tools & Platforms
   {
@@ -66,6 +76,11 @@ export const skills: Skill[] = [
     id: 'notion',
     name: 'Notion',
     class: 'devicon-notion-plain',
+  },
+  {
+    id: 'swagger',
+    name: 'Swagger',
+    class: 'devicon-swagger-plain',
   },
   // Others
   {
@@ -110,5 +125,5 @@ export const featuredToolsSkills = filterSkills([
   'github',
   'vscode',
   'postman',
-  'notion',
+  'swagger',
 ]);

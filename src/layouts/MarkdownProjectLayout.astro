@@ -1,7 +1,13 @@
 ---
+import SkillList from '@/components/custom/SkillList.astro';
+import { filterSkills } from '@/data/skills';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { Image } from 'astro:assets';
+import { Icon } from 'astro-icon/components';
+import { formatDateMonth } from '@/utils';
+
 const { frontmatter } = Astro.props;
+const technologies = filterSkills(frontmatter.technologies);
 ---
 
 <BaseLayout pageTitle={`${frontmatter.title} - AzBagas`}>
@@ -10,8 +16,36 @@ const { frontmatter } = Astro.props;
     <Image
       src={frontmatter.featuredImage}
       alt={frontmatter.title}
-      class="rounded-lg mb-2"
+      class="rounded-lg"
     />
+    <div class="not-prose">
+      <h3 class="font-bold">Role</h3>
+      <p>{frontmatter.role}</p>
+
+      <h3 class="font-bold mt-6">Work Time</h3>
+      <p>{formatDateMonth(frontmatter.startDate)} - {formatDateMonth(frontmatter.endDate)}</p>
+      
+      <!-- <h3 class="font-bold mt-6">Project Status</h3>
+      <p class="flex items-center gap-2">
+        <Icon
+          name="mdi:circle"
+          class={frontmatter.status === 'Public'
+            ? 'text-green-500'
+            : 'text-red-500'}
+        />
+        {frontmatter.status}
+      </p> -->
+
+      <h3 class="font-bold mt-6">Technologies Used in My Role</h3>
+      <SkillList skills={technologies} />
+    </div>
     <slot />
   </article>
 </BaseLayout>
+
+<script>
+  // Make a link tag in article target blank
+  document.querySelectorAll('article a').forEach((el) => {
+    el.setAttribute('target', '_blank');
+  });
+</script>
