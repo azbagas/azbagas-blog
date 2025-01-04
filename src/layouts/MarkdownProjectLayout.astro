@@ -43,9 +43,29 @@ const technologies = filterSkills(frontmatter.technologies);
   </article>
 </BaseLayout>
 
+<style is:global>
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+  }
+
+  a {
+    word-wrap: break-word;
+  }
+</style>
+
 <script>
   // Make a link tag in article target blank
   document.querySelectorAll('article a').forEach((el) => {
     el.setAttribute('target', '_blank');
+  });
+
+  // Make footnote ref and backref target self
+  document.querySelectorAll('a[data-footnote-backref]').forEach((el) => {
+    el.setAttribute('target', '_self');
+  });
+
+  document.querySelectorAll('a[data-footnote-ref]').forEach((el) => {
+    el.setAttribute('target', '_self');
   });
 </script>
