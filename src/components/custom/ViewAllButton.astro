@@ -1,0 +1,12 @@
+---
+import { Button } from "@/components/ui/button";
+
+const { link, text } = Astro.props;
+---
+<div class="text-center mt-8">
+  <a href={link}>
+    <Button variant="outline">
+      {text}
+    </Button>
+  </a>
+</div>

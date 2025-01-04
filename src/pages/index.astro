@@ -8,6 +8,7 @@ import SkillList from '@/components/custom/SkillList.astro';
 import ProjectList from '@/components/custom/ProjectList.astro';
 import SectionHeading from '@/components/custom/SectionHeading.astro';
 import PostList from '@/components/custom/PostList.astro';
+import ViewAllButton from '@/components/custom/ViewAllButton.astro';
 ---
 
 <BaseLayout pageTitle="AzBagas - Personal Blog">
@@ -60,6 +61,7 @@ import PostList from '@/components/custom/PostList.astro';
     />
 
     <ProjectList />
+    <ViewAllButton link="/projects" text="View All Projects"/>
   </section>
   <Separator />
   <section>
@@ -69,5 +71,6 @@ import PostList from '@/components/custom/PostList.astro';
     />
 
     <PostList />
+    <ViewAllButton link="/blog" text="View All Posts"/>
   </section>
 </BaseLayout>
