@@ -46,4 +46,4 @@ This application made dental clinic management more manageable and centralized. 
 
 ## Links
 
-- Application: [elydentalclinic.com](https://elydentalclinic.com/)
+- Application: [elydentalclinic.my.id](https://elydentalclinic.my.id/)
