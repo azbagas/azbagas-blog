@@ -9,6 +9,7 @@ import ProjectList from '@/components/custom/ProjectList.astro';
 import SectionHeading from '@/components/custom/SectionHeading.astro';
 import PostList from '@/components/custom/PostList.astro';
 import ViewAllButton from '@/components/custom/ViewAllButton.astro';
+import Bookshelf from '@/components/custom/Bookshelf.astro';
 ---
 
 <BaseLayout pageTitle="AzBagas - Personal Blog">
@@ -72,5 +73,14 @@ import ViewAllButton from '@/components/custom/ViewAllButton.astro';
 
     <PostList />
     <ViewAllButton link="/blog" text="View All Posts"/>
+  </section>
+  <Separator />
+  <section>
+    <SectionHeading
+      title="Bookshelf"
+      description="Books that I've read."
+    />
+          
+    <Bookshelf />
   </section>
 </BaseLayout>

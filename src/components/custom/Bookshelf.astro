@@ -1,0 +1,54 @@
+---
+
+---
+
+<style type="text/css" media="screen" is:inline>
+  .gr_grid_container {
+    /* customize grid container div here. eg: width: 500px; */
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    justify-content: space-between;
+  }
+
+  .gr_grid_container br {
+    display: none;
+  }
+
+  .gr_grid_book_container {
+    /* customize book cover container div here */
+    /* float: left; */
+    width: 98px;
+    height: 160px;
+    padding: 0px 0px;
+    overflow: hidden;
+  }
+
+  .gr_grid_book_container img {
+    border-radius: 6px;
+  }
+
+  .gr_grid_branding {
+    display: none;
+  }
+</style>
+
+<div id="gr_grid_widget_1759908030" class="mt-4"></div>
+<a
+  href="https://www.goodreads.com/user/show/189255530-azhar-bagaskara"
+  target="_blank"
+  class="underline block mt-4 text-right">See more on Goodreads »</a
+>
+
+<script
+  is:inline
+  src="https://www.goodreads.com/review/grid_widget/189255530.Azhar's%20bookshelf:%20read?cover_size=medium&hide_link=&hide_title=true&num_books=14&order=d&shelf=read&sort=rating&widget_id=1759908030"
+  type="text/javascript"
+  charset="utf-8"></script>
+
+<script>
+  document.querySelectorAll('.gr_grid_book_container a').forEach((el) => {
+    el.setAttribute('target', '_blank');
+  });
+</script>
