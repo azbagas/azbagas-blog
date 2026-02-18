@@ -1,8 +1,12 @@
+---
+const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
+---
+
 <div id="disqus_thread"></div>
 
-<script is:inline>
+<script is:inline define:vars={{ canonicalURL }}>
   var disqus_config = function () {
-    this.page.url = window.location.href;
+    this.page.url = canonicalURL;
     this.page.identifier = window.location.pathname;
   };
 
