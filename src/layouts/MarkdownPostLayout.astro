@@ -2,11 +2,14 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { Image } from 'astro:assets';
 import { formatDate } from '@/utils';
+import Disqus from '@/components/Disqus.astro';
 const { frontmatter } = Astro.props;
 ---
 
 <BaseLayout pageTitle={`${frontmatter.title} - AzBagas`}>
-  <article class="prose max-w-none dark:prose-invert mx-auto mt-10 break-words">
+  <article
+    class="prose max-w-none dark:prose-invert mx-auto mt-10 mb-24 break-words"
+  >
     <p>{formatDate(frontmatter.publishedDate)}</p>
     <h1>{frontmatter.title}</h1>
     <p>By <span class="font-semibold">Azhar Bagaskara</span></p>
@@ -19,6 +22,8 @@ const { frontmatter } = Astro.props;
     />
     <slot />
   </article>
+  <hr class="mb-16" />
+  <Disqus />
 </BaseLayout>
 
 <style is:global>
