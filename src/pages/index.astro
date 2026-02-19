@@ -16,15 +16,12 @@ import Bookshelf from '@/components/custom/Bookshelf.astro';
   <section
     class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mt-10 sm:mt-20 lg:mt-28"
   >
-    <div>
+    <div class="sm:w-3/5">
       <h1 class="text-4xl lg:text-5xl font-bold">Hello, I'm Bagas.</h1>
       <p class="mt-6">
-        I'm a Computer Science student based in Indonesia. <br
-          class="hidden sm:block"
-        />
-        I'm passionate about <span class="font-semibold"
-          >backend engineering</span
-        >. <br class="hidden sm:block" />
+        A Computer Science student based in Indonesia with a deep focus on <span
+          class="font-semibold">backend engineering</span
+        >. I enjoy turning complex logic into efficient and maintainable code.
         <p class="mt-4">
           Explore my <a href="/projects" class="font-semibold underline"
             >previous projects</a
@@ -45,8 +42,8 @@ import Bookshelf from '@/components/custom/Bookshelf.astro';
   <Separator />
   <section>
     <SectionHeading
-      title="My Skills"
-      description="Here are the skills I've mastered along my journey."
+      title="Tech Stack"
+      description="My core competencies and the technologies I've mastered."
     />
 
     <h3 class="text-lg font-semibold mt-8">Backend</h3>
@@ -58,29 +55,29 @@ import Bookshelf from '@/components/custom/Bookshelf.astro';
   <section>
     <SectionHeading
       title="Recent Projects"
-      description="Here are the latest projects I've worked on."
+      description="A collection of my latest projects."
     />
 
     <ProjectList />
-    <ViewAllButton link="/projects" text="View All Projects"/>
+    <ViewAllButton link="/projects" text="View All Projects" />
   </section>
   <Separator />
   <section>
     <SectionHeading
-      title="Latest Posts"
-      description="Here are the latest posts I've written."
+      title="Posts"
+      description="Technical notes and personal insights."
     />
 
     <PostList />
-    <ViewAllButton link="/blog" text="View All Posts"/>
+    <ViewAllButton link="/blog" text="View All Posts" />
   </section>
   <Separator />
   <section>
     <SectionHeading
       title="Bookshelf"
-      description="Books that I've read."
+      description="A list of books that have shaped my perspective on life."
     />
-          
+
     <Bookshelf />
   </section>
 </BaseLayout>
