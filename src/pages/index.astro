@@ -3,7 +3,11 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import { Image } from 'astro:assets';
 import azbagasPhoto from '@/assets/images/azbagas-photo.jpg';
 import Separator from '@/components/custom/Separator.astro';
-import { featuredBackendSkills, featuredToolsSkills } from '@/data/skills';
+import {
+  languageAndFrameworkSkills,
+  databaseAndInfrastructureSkills,
+  developmentEcosystemSkills,
+} from '@/data/skills';
 import SkillList from '@/components/custom/SkillList.astro';
 import ProjectList from '@/components/custom/ProjectList.astro';
 import SectionHeading from '@/components/custom/SectionHeading.astro';
@@ -46,10 +50,12 @@ import Bookshelf from '@/components/custom/Bookshelf.astro';
       description="My core competencies and the technologies I've mastered."
     />
 
-    <h3 class="text-lg font-semibold mt-8">Backend</h3>
-    <SkillList skills={featuredBackendSkills} />
-    <h3 class="text-lg font-semibold mt-8">Tools and Platforms</h3>
-    <SkillList skills={featuredToolsSkills} />
+    <h3 class="text-lg font-semibold mt-8">Languages & Frameworks</h3>
+    <SkillList skills={languageAndFrameworkSkills} />
+    <h3 class="text-lg font-semibold mt-8">Databases & Infrastructure</h3>
+    <SkillList skills={databaseAndInfrastructureSkills} />
+    <h3 class="text-lg font-semibold mt-8">Development Ecosystem</h3>
+    <SkillList skills={developmentEcosystemSkills} />
   </section>
   <Separator />
   <section>

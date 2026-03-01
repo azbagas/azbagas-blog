@@ -5,11 +5,11 @@ export type Skill = {
 };
 
 export const skills: Skill[] = [
-  // Backend
+  // Languages & Frameworks
   {
-    id: 'nodejs',
-    name: 'Node.js',
-    class: 'devicon-nodejs-plain',
+    id: 'golang',
+    name: 'Golang',
+    class: 'devicon-go-original-wordmark',
   },
   {
     id: 'typescript',
@@ -17,9 +17,9 @@ export const skills: Skill[] = [
     class: 'devicon-typescript-plain',
   },
   {
-    id: 'express',
-    name: 'Express.js',
-    class: 'devicon-express-original',
+    id: 'javascript',
+    name: 'JavaScript',
+    class: 'devicon-javascript-plain',
   },
   {
     id: 'php',
@@ -27,9 +27,21 @@ export const skills: Skill[] = [
     class: 'devicon-php-plain',
   },
   {
+    id: 'express',
+    name: 'Express.js',
+    class: 'devicon-express-original',
+  },
+  {
     id: 'laravel',
     name: 'Laravel',
     class: 'devicon-laravel-original',
+  },
+
+  // Databases & Infrastructure
+  {
+    id: 'postgresql',
+    name: 'PostgreSQL',
+    class: 'devicon-postgresql-plain',
   },
   {
     id: 'mysql',
@@ -42,11 +54,15 @@ export const skills: Skill[] = [
     class: 'devicon-mongodb-plain',
   },
   {
+    id: 'redis',
+    name: 'Redis',
+    class: 'devicon-redis-plain',
+  },
+  {
     id: 'rabbitmq',
     name: 'RabbitMQ',
     class: 'devicon-rabbitmq-original',
   },
-  // Tools & Platforms
   {
     id: 'docker',
     name: 'Docker',
@@ -56,6 +72,23 @@ export const skills: Skill[] = [
     id: 'googlecloud',
     name: 'Google Cloud',
     class: 'devicon-googlecloud-plain',
+  },
+
+  // Development Ecosystem
+  {
+    id: 'openapi',
+    name: 'OpenAPI',
+    class: 'devicon-openapi-plain',
+  },
+  {
+    id: 'swagger',
+    name: 'Swagger',
+    class: 'devicon-swagger-plain',
+  },
+  {
+    id: 'postman',
+    name: 'Postman',
+    class: 'devicon-postman-plain',
   },
   {
     id: 'github',
@@ -67,22 +100,13 @@ export const skills: Skill[] = [
     name: 'VSCode',
     class: 'devicon-vscode-plain',
   },
-  {
-    id: 'postman',
-    name: 'Postman',
-    class: 'devicon-postman-plain',
-  },
+
+  // Others
   {
     id: 'notion',
     name: 'Notion',
     class: 'devicon-notion-plain',
   },
-  {
-    id: 'swagger',
-    name: 'Swagger',
-    class: 'devicon-swagger-plain',
-  },
-  // Others
   {
     id: 'jquery',
     name: 'jQuery',
@@ -103,6 +127,11 @@ export const skills: Skill[] = [
     name: 'Astro',
     class: 'devicon-astro-plain',
   },
+  {
+    id: 'nodejs',
+    name: 'Node.js',
+    class: 'devicon-nodejs-plain',
+  },
 ];
 
 export const filterSkills = (skillIds: string[]): Skill[] => {
@@ -110,20 +139,29 @@ export const filterSkills = (skillIds: string[]): Skill[] => {
   return skills.filter((skill) => skillIdSet.has(skill.id));
 };
 
-export const featuredBackendSkills = filterSkills([
+export const languageAndFrameworkSkills = filterSkills([
+  'golang',
   'typescript',
-  'express',
+  'javascript',
   'php',
+  'express',
   'laravel',
-  'mysql',
-  'mongodb',
 ]);
 
-export const featuredToolsSkills = filterSkills([
+export const databaseAndInfrastructureSkills = filterSkills([
+  'postgresql',
+  'mysql',
+  'mongodb',
+  'redis',
+  'rabbitmq',
   'docker',
   'googlecloud',
+]);
+
+export const developmentEcosystemSkills = filterSkills([
+  'openapi',
+  'swagger',
+  'postman',
   'github',
   'vscode',
-  'postman',
-  'swagger',
 ]);
