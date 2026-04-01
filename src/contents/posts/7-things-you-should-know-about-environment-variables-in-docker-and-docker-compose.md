@@ -1,6 +1,6 @@
 ---
-title: '7 Tips for Using Environment Variables in Docker and Docker Compose'
-featuredImage: '../../assets/images/posts/7-tips-env-vars-in-docker.jpg'
+title: '7 Things You Should Know About Environment Variables in Docker and Docker Compose'
+featuredImage: '../../assets/images/posts/7-things-env-vars-in-docker.jpg'
 publishedDate: 2026-03-30
 ---
 
@@ -8,11 +8,11 @@ I've worked with Docker quite a few times while building applications, yet I alw
 
 The same problems keep coming back: env values not being read, `.env` files accidentally getting baked into Docker images, misconfigured ports and hosts, and hours lost to debugging.
 
-So in this post, I want to share 7 tips I've picked up about using environment variables with Docker and Docker Compose.
+So in this post, I want to share 7 things I've picked up about using environment variables in Docker and Docker Compose.
 
 ## What Are Environment Variables?
 
-Before we get into the tips, let's define what environment variables (**env vars**) actually are.
+Before we go any further, let's define what environment variables (**env vars**) actually are.
 
 > Environment variables are external configuration settings that allow you to modify an application's behavior without altering its source code ([freeCodeCamp](https://www.freecodecamp.org/news/what-are-environment-variables-and-how-can-i-use-them-with-gatsby-and-netlify)).
 
@@ -22,9 +22,9 @@ Common examples of values stored as env vars include the app port, database URL,
 
 In most projects, env vars are stored in a `.env` file at the root of the project directory. If you've browsed open source repositories, you've probably seen a `.env.example` file. Anyone who wants to run the project just copies it (`copy .env.example .env`) and updates the values to match their local setup.
 
-Working with Docker made managing env vars feel overwhelming at first for me. That's exactly why I put together these tips from everything I've learned along the way.
+Working with Docker made managing env vars feel overwhelming at first for me. That's exactly why I put together these things from everything I've learned along the way.
 
-## Tip 1: Don't Include Your `.env` File in the Docker Image
+## 1. `.env` File Must Not Be Included in a Docker Image
 
 To build a Docker image, we typically create a `Dockerfile` at the root of our project. One of the most commonly used commands in that file is `COPY`, which copies our project files into the image. Here's an example that copies everything:
 
@@ -48,13 +48,13 @@ With that in place, the `.env` file won't be included when building your Docker 
 
 The bottom line: whenever you create a `Dockerfile`, make sure you also create a `.dockerignore`.
 
-## Tip 2: Make Sure Your App Can Read Env Vars from the System, Not Just from `.env`
+## 2. Your App Must Be Able to Read Env Vars from the OS, Not Just from the `.env` File
 
 For most of my development career, I thought of `.env` as the actual configuration source. But that's not quite right.
 
 According to the [Twelve-Factor App](https://12factor.net/config) methodology, configuration should be stored as system environment variables (not in config files like `.env`). The `.env` file is a local development convention for **simulating** those env vars, not the recommended approach for production.
 
-So while we use `.env` during development, when an application runs inside a container, it should read configuration from **system variables** (for example, in Node.js we accessed it with: `process.env.{VAR}`).
+So, we do use `.env` during development. However, when an application runs inside a container, it should read configuration from **system variables** (for example, in Node.js, we access them with `process.env.{VAR}`).
 
 That means we need to make sure our app can read env vars from the OS environment, not just from a `.env` file.
 
@@ -100,11 +100,11 @@ docker run -e MY_VAR=hello -e API_KEY=12345 <image_name>
 
 Env vars injected this way (via `--env-file` or `-e`) become system environment variables inside the container. There's no `.env` file inside the container at all.
 
-## Tip 3: Validate Environment Variables at App Startup
+## 3. Env Vars Should Be Validated at Application Startup
 
 Always validate your env vars when the application starts. Without validation, your app may run into silent failures or cryptic runtime errors that are hard to trace.
 
-Imagine forgetting to set a third-party API key and not catching it at startup. The error only surfaces when a feature that actually uses that API is triggered. That can eat up a lot of time.
+Imagine forgetting to set a third-party API key and not catching it at startup. The error only surfaces when a feature that actually uses that API is triggered. It can take a lot of time to figure it out.
 
 Here's an example of validation in Go using the [github.com/go-playground/validator/v10](http://github.com/go-playground/validator/v10) module:
 
@@ -166,6 +166,7 @@ func Load() (*Config, error) {
 		},
 	}
 
+	// Validate them
 	validate := validator.New(validator.WithRequiredStructEnabled())
 	if err := validate.Struct(cfg); err != nil {
 		return nil, err
@@ -175,13 +176,11 @@ func Load() (*Config, error) {
 }
 ```
 
-## Tip 4: Use `env_file` for Your Main Service and `environment` for Others
+## 4. Use `env_file` for the Main Service, `environment` for Other Services
 
-Your main application service will typically need all the env vars defined in `.env`. Other services, like a database, usually only need a subset of those values. With that in mind, inject env vars into the main service using the `env_file` attribute, and handle other services explicitly with the `environment` attribute.
+Your main application service will typically need all the env vars defined in `.env`. Other services, like a database, usually only need a subset of those values. With that in mind, in the Docker Compose file, inject env vars into the main service using the `env_file` attribute, and handle other services explicitly with the `environment` attribute.
 
 The `${VAR}` syntax in Docker Compose automatically reads from the `.env` file (This is called [interpolation](https://docs.docker.com/reference/compose-file/interpolation/)). But, you must place the `docker-compose.yml` file in the same level directory as `.env`.
-
-Note that any variable already defined in your shell environment will override the value from `.env`.
 
 Keeping injection scoped per service helps minimize what each service can access, which aligns with the Principle of Least Privilege.
 
@@ -199,27 +198,27 @@ services:
     image: postgres:16-alpine
     # Use environment for other services
     environment:
-      POSTGRES_USER: ${DB_USER}
+      POSTGRES_USER: ${DB_USER} # This will read from the `.env` file
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_DB: ${DB_NAME}
 
   # ...
 ```
 
-## Tip 5: Keep Container Port and Host Port Separate
+## 5. Container Port and Host Port Are Two Different Things
 
-In web service applications that expose a port (like a RESTful API), it's common to make that port configurable via env vars. That's a good habit, and it works just fine with Docker, as long as you understand the difference between **container port** and **host port**.
+In web service applications that expose a port (like a RESTful API), it's common to make that port configurable via env vars. By making the port configurable, we can easily change it if it conflicts with another application that is running. That's a good habit, and it works just fine with Docker, as long as you understand the difference between **container port** and **host port**.
 
 The **container port** is the port the application listens on inside the container. The **host port** is the port exposed to your local machine.
 
 ```
-[ Browser / Client ]
-        |
-   HOST_PORT (e.g. 9090)   ← can be changed without touching the code
-        |
-   CONTAINER_PORT (e.g. 8080)  ← fixed, controlled by the application
-        |
-   [ App inside the container ]
+   [ Browser / Client ]
+            |
+   HOST_PORT (e.g. 9090)
+            |
+ CONTAINER_PORT (e.g. 8080)
+            |
+[ App inside the container ]
 ```
 
 Since only one application runs inside a container, port conflicts on the container side are rarely an issue. That means the container port can be hardcoded as a default in the application, while still reading from an env var if one is provided:
@@ -267,7 +266,7 @@ EXPOSE 8080
 
 > ⚠️ Keep in mind: `EXPOSE` in a `Dockerfile` is **documentation only**. It signals to users of the image that the container uses that port, but it does not automatically publish it to the host. The port is only truly accessible from the host when you use the `-p` flag with `docker run` or the `ports:` attribute in docker-compose.
 
-If there's a port conflict on your local machine, the right fix is to change the **host port**, not the container port. You can make the host port dynamic via env vars in docker-compose:
+If there's a port conflict on your local machine, the right fix is to change the **host port**, not the container port. You can make the host port dynamic via env vars:
 
 `.env`:
 
@@ -290,7 +289,7 @@ services:
 
 This approach gives you the best of both worlds: a stable, predictable container port and a flexible host port for local development.
 
-## Tip 6: Use the Service Name as the Database Host
+## 6. In Docker Compose, the Database Host Is the Service Name
 
 When running your app locally, you typically set `DB_HOST` to `localhost`.
 
@@ -302,6 +301,8 @@ When running your app locally, you typically set `DB_HOST` to `localhost`.
 DB_HOST=localhost
 # ...
 ```
+
+> Actually, it's not only a database host. Any service that has a host configuration also applies. Another example: RabbitMQ host.
 
 However, when running the app with Docker Compose, `DB_HOST` should no longer be `localhost`. It should be the name of your database service. That's because Docker uses its internal DNS to resolve the hostname of each service.
 
@@ -351,15 +352,15 @@ volumes:
 
 > The `env_file` and `environment` attributes can be used together. If the same key appears in both, the value from `environment` takes precedence.
 
-## Tip 7: Use a Secret Manager in Production
+## 7. Env Vars Alone Are Not Enough for Production
 
-Some env var values are particularly sensitive. For example, database passwords, encryption keys, third-party API keys, and similar credentials. Storing these as plain environment variables carries real risk. In the context of Docker, the main concern is that `docker inspect <container_name>` will expose all env vars in plaintext. Anyone with access to the Docker daemon can see them. That's a compelling reason to use a secret manager in production.
+Some env vars are particularly sensitive. For example, database passwords, encryption keys, third-party API keys, and similar credentials. Storing these as plain environment variables carries real risk. In the context of Docker, the main concern is that `docker inspect <container_name>` will expose all env vars in plaintext. Anyone with access to the Docker daemon can see them. That's a compelling reason to use a secret manager in production.
 
 In a production environment, sensitive values should be stored in a dedicated secret management service. These services encrypt data at rest and provide audit logs. Options include Docker Secrets, HashiCorp Vault, AWS Secrets Manager, Google Cloud Secret Manager, and Azure Key Vault. Explore whichever fits your requirements best.
 
 ## Conclusion
 
-In this post, we've covered how to handle environment variables with Docker and Docker Compose. From keeping `.env` out of your Docker image, to ensuring your app can read env vars from the system, to validating them at startup, using `env_file` for the main service and `environment` for others, separating container and host ports, setting the correct database host, and using a secret manager in production.
+In this post, we've covered 7 things you should know about handling environment variables with Docker and Docker Compose. From keeping `.env` out of your Docker image, to ensuring your app can read env vars from the OS, to validating them at startup, using `env_file` for the main service and `environment` for others, understanding the difference between container and host ports, setting the correct database host, and why env vars alone are not enough for production.
 
 As a reminder, all of these tips come from my own experience and understanding of working with env vars in Docker. If you have a different approach or something to add, feel free to share it in the comments.
 
