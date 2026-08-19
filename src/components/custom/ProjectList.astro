@@ -9,11 +9,21 @@ import {
 import { getCollection } from 'astro:content';
 import { Image } from 'astro:assets';
 
-const projects = await getCollection('projects');
+interface Props {
+  limit?: number;
+}
+
+const { limit } = Astro.props;
+
+let projects = await getCollection('projects');
 // Sort the projects by date
 projects.sort(
   (a, b) => b.data.endDate.getTime() - a.data.endDate.getTime()
 );
+
+if (limit) {
+  projects = projects.slice(0, limit);
+}
 ---
 
 <div class="grid md:grid-cols-2 gap-6 mt-4">
