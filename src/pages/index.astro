@@ -64,7 +64,7 @@ import Bookshelf from '@/components/custom/Bookshelf.astro';
       description="A collection of my latest projects."
     />
 
-    <ProjectList />
+    <ProjectList limit={4} />
     <ViewAllButton link="/projects" text="View All Projects" />
   </section>
   <Separator />
@@ -74,7 +74,7 @@ import Bookshelf from '@/components/custom/Bookshelf.astro';
       description="Technical notes and personal insights."
     />
 
-    <PostList />
+    <PostList limit={3} />
     <ViewAllButton link="/blog" text="View All Posts" />
   </section>
   <Separator />

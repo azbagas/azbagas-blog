@@ -10,11 +10,21 @@ import { getCollection } from 'astro:content';
 import { Image } from 'astro:assets';
 import { generateExcerpt, formatDate } from '@/utils';
 
-const posts = await getCollection('posts');
+interface Props {
+  limit?: number;
+}
+
+const { limit } = Astro.props;
+
+let posts = await getCollection('posts');
 // Sort the posts by date
 posts.sort(
   (a, b) => b.data.publishedDate.getTime() - a.data.publishedDate.getTime()
 );
+
+if (limit) {
+  posts = posts.slice(0, limit);
+}
 ---
 
 <div class="grid gap-6 mt-4">
