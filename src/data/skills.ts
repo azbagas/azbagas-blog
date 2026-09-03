@@ -27,6 +27,11 @@ export const skills: Skill[] = [
     class: 'devicon-php-plain',
   },
   {
+    id: 'fiber',
+    name: 'Fiber',
+    class: 'devicon-fiber-plain',
+  },
+  {
     id: 'express',
     name: 'Express.js',
     class: 'devicon-express-original',
@@ -69,9 +74,19 @@ export const skills: Skill[] = [
     class: 'devicon-docker-plain',
   },
   {
+    id: 'kubernetes',
+    name: 'Kubernetes',
+    class: 'devicon-kubernetes-plain',
+  },
+  {
     id: 'googlecloud',
     name: 'Google Cloud',
     class: 'devicon-googlecloud-plain',
+  },
+  {
+    id: 'nginx',
+    name: 'nginx',
+    class: 'devicon-nginx-original',
   },
 
   // Development Ecosystem
@@ -159,6 +174,7 @@ export const languageAndFrameworkSkills = filterSkills([
   'typescript',
   'javascript',
   'php',
+  'fiber',
   'express',
   'laravel',
 ]);
@@ -170,7 +186,9 @@ export const databaseAndInfrastructureSkills = filterSkills([
   'redis',
   'rabbitmq',
   'docker',
+  'kubernetes',
   'googlecloud',
+  'nginx',
 ]);
 
 export const developmentEcosystemSkills = filterSkills([
