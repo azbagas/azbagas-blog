@@ -132,6 +132,21 @@ export const skills: Skill[] = [
     name: 'Node.js',
     class: 'devicon-nodejs-plain',
   },
+  {
+    id: 'reactnative',
+    name: 'React Native',
+    class: 'devicon-reactnative-original',
+  },
+  {
+    id: 'expo',
+    name: 'Expo',
+    class: 'devicon-expo-original',
+  },
+  {
+    id: 'zustand',
+    name: 'Zustand',
+    class: 'devicon-zustand-plain',
+  },
 ];
 
 export const filterSkills = (skillIds: string[]): Skill[] => {
