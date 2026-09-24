@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import MarkdownPostLayout from '@/layouts/MarkdownPostLayout.astro';
+import Alert from '@/components/Alert.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('posts');
@@ -13,5 +14,5 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 ---
 <MarkdownPostLayout frontmatter={post.data} body={post.body}>
-  <Content />
+  <Content components={{ Alert }} />
 </MarkdownPostLayout>

@@ -264,7 +264,9 @@ EXPOSE 8080
 # ...
 ```
 
-> ⚠️ Keep in mind: `EXPOSE` in a `Dockerfile` is **documentation only**. It signals to users of the image that the container uses that port, but it does not automatically publish it to the host. The port is only truly accessible from the host when you use the `-p` flag with `docker run` or the `ports:` attribute in docker-compose.
+<Alert type="note">
+`EXPOSE` in a `Dockerfile` is **documentation only**. It signals to users of the image that the container uses that port, but it does not automatically publish it to the host. The port is only truly accessible from the host when you use the `-p` flag with `docker run` or the `ports:` attribute in docker-compose.
+</Alert>
 
 If there's a port conflict on your local machine, the right fix is to change the **host port**, not the container port. You can make the host port dynamic via env vars:
 
@@ -302,7 +304,9 @@ DB_HOST=localhost
 # ...
 ```
 
-> Actually, it's not only a database host. Any service that has a host configuration also applies. Another example: RabbitMQ host.
+<Alert type="note">
+Actually, it's not only a database host. Any service that has a host configuration also applies. Another example: RabbitMQ host.
+</Alert>
 
 However, when running the app with Docker Compose, `DB_HOST` should no longer be `localhost`. It should be the name of your database service. That's because Docker uses its internal DNS to resolve the hostname of each service.
 
