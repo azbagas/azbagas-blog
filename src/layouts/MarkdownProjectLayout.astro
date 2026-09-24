@@ -8,9 +8,22 @@ import { formatDateMonth } from '@/utils';
 
 const { frontmatter } = Astro.props;
 const technologies = filterSkills(frontmatter.technologies);
+
+const projectSchema = {
+  '@type': 'SoftwareApplication',
+  name: frontmatter.title,
+  description: frontmatter.description,
+  applicationCategory: 'DeveloperApplication',
+  author: { '@id': 'https://azbagas.com/#person' },
+};
 ---
 
-<BaseLayout pageTitle={`${frontmatter.title} - AzBagas`}>
+<BaseLayout
+  pageTitle={`${frontmatter.title} - AzBagas`}
+  description={frontmatter.description}
+  image={frontmatter.featuredImage}
+  structuredData={projectSchema}
+>
   <article class="prose dark:prose-invert mx-auto mt-10 max-w-none">
     <h1>{frontmatter.title}</h1>
     <Image

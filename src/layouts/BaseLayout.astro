@@ -2,8 +2,29 @@
 import Navbar from '@/components/custom/Navbar.astro';
 import Footer from '@/components/custom/Footer.astro';
 import '@/styles/globals.css';
-import Analytics from '@vercel/analytics/astro'
-const { pageTitle } = Astro.props;
+import Analytics from '@vercel/analytics/astro';
+import SEO from '@/components/custom/SEO.astro';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  pageTitle?: string;
+  description?: string;
+  image?: ImageMetadata | string;
+  article?: boolean;
+  publishedDate?: Date;
+  noindex?: boolean;
+  structuredData?: Record<string, any> | Array<Record<string, any>>;
+}
+
+const {
+  pageTitle = 'AzBagas - Personal Blog',
+  description,
+  image,
+  article,
+  publishedDate,
+  noindex,
+  structuredData,
+} = Astro.props;
 ---
 
 <script is:inline>
@@ -43,6 +64,15 @@ const { pageTitle } = Astro.props;
     <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
           
     <title>{pageTitle}</title>
+    <SEO
+      title={pageTitle}
+      description={description}
+      image={image}
+      article={article}
+      publishedDate={publishedDate}
+      noindex={noindex}
+      structuredData={structuredData}
+    />
   </head>
   <body>
     <Navbar />

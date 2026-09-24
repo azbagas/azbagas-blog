@@ -1,12 +1,27 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { Image } from 'astro:assets';
-import { formatDate } from '@/utils';
+import { formatDate, generateExcerpt } from '@/utils';
 import Disqus from '@/components/Disqus.astro';
-const { frontmatter } = Astro.props;
+
+interface Props {
+  frontmatter: any;
+  body?: string;
+}
+
+const { frontmatter, body } = Astro.props;
+const description =
+  frontmatter.description ||
+  (body ? generateExcerpt(body, 160) : `Read ${frontmatter.title} on AzBagas.`);
 ---
 
-<BaseLayout pageTitle={`${frontmatter.title} - AzBagas`}>
+<BaseLayout
+  pageTitle={`${frontmatter.title} - AzBagas`}
+  description={description}
+  image={frontmatter.featuredImage}
+  article={true}
+  publishedDate={frontmatter.publishedDate}
+>
   <article
     class="prose max-w-none dark:prose-invert mx-auto mt-10 mb-24 break-words"
   >

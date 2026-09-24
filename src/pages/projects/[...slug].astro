@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import MarkdownProjectLayout from '@/layouts/MarkdownProjectLayout.astro';
+import Alert from '@/components/Alert.astro';
 
 export async function getStaticPaths() {
   const projects = await getCollection('projects');
@@ -13,5 +14,5 @@ const { project } = Astro.props;
 const { Content } = await render(project);
 ---
 <MarkdownProjectLayout frontmatter={project.data}>
-  <Content />
+  <Content components={{ Alert }} />
 </MarkdownProjectLayout>

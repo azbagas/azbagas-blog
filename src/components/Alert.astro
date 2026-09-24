@@ -1,0 +1,83 @@
+---
+export interface Props {
+  type?: 'note' | 'tip' | 'important' | 'warning' | 'caution';
+  title?: string;
+  class?: string;
+}
+
+const { type = 'note', title, class: className = '' } = Astro.props;
+const normalizedType = (type?.toLowerCase() || 'note') as
+  | 'note'
+  | 'tip'
+  | 'important'
+  | 'warning'
+  | 'caution';
+
+const config = {
+  note: {
+    defaultTitle: 'Note',
+    borderColor: 'border-l-[#0969da] dark:border-l-[#2f81f7]',
+    textColor: 'text-[#0969da] dark:text-[#2f81f7]',
+  },
+  tip: {
+    defaultTitle: 'Tip',
+    borderColor: 'border-l-[#1a7f37] dark:border-l-[#3fb950]',
+    textColor: 'text-[#1a7f37] dark:text-[#3fb950]',
+  },
+  important: {
+    defaultTitle: 'Important',
+    borderColor: 'border-l-[#8250df] dark:border-l-[#a371f7]',
+    textColor: 'text-[#8250df] dark:text-[#a371f7]',
+  },
+  warning: {
+    defaultTitle: 'Warning',
+    borderColor: 'border-l-[#9a6700] dark:border-l-[#d29922]',
+    textColor: 'text-[#9a6700] dark:text-[#d29922]',
+  },
+  caution: {
+    defaultTitle: 'Caution',
+    borderColor: 'border-l-[#d1242f] dark:border-l-[#f85149]',
+    textColor: 'text-[#d1242f] dark:text-[#f85149]',
+  },
+};
+
+const current = config[normalizedType] || config.note;
+const displayTitle = title || current.defaultTitle;
+---
+
+<aside
+  class={`my-6 pl-4 border-l-[3.5px] py-0.5 text-sm md:text-base ${current.borderColor} ${className}`}
+  role="alert"
+>
+  <div class={`flex items-center gap-2 font-medium tracking-tight ${current.textColor}`}>
+    {normalizedType === 'note' && (
+      <svg class="w-4 h-4 shrink-0 fill-current" viewBox="0 0 16 16" aria-hidden="true">
+        <path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z" />
+      </svg>
+    )}
+    {normalizedType === 'tip' && (
+      <svg class="w-4 h-4 shrink-0 fill-current" viewBox="0 0 16 16" aria-hidden="true">
+        <path d="M8 1.5c-2.363 0-4 1.69-4 3.75 0 .984.424 1.625.984 2.304l.214.253c.223.264.47.556.673.848.284.411.537.896.621 1.49a.75.75 0 0 1-1.484.211c-.04-.282-.163-.547-.37-.847a8.456 8.456 0 0 0-.542-.68c-.084-.1-.173-.205-.268-.32C3.201 7.75 2.5 6.766 2.5 5.25 2.5 2.31 4.863 0 8 0s5.5 2.31 5.5 5.25c0 1.516-.701 2.5-1.328 3.259-.095.115-.184.22-.268.319-.18.213-.362.434-.541.681-.208.3-.33.565-.371.847a.751.751 0 0 1-1.485-.212c.084-.593.337-1.078.621-1.489.203-.292.45-.584.673-.848.075-.088.147-.173.213-.253.561-.679.985-1.32.985-2.304 0-2.06-1.637-3.75-4-3.75ZM5.75 12h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1 0-1.5ZM6.25 15h3.5a.75.75 0 0 1 0 1.5h-3.5a.75.75 0 0 1 0-1.5Z" />
+      </svg>
+    )}
+    {normalizedType === 'important' && (
+      <svg class="w-4 h-4 shrink-0 fill-current" viewBox="0 0 16 16" aria-hidden="true">
+        <path d="M0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v9.5A1.75 1.75 0 0 1 14.25 13H8.06l-2.573 2.573A1.458 1.458 0 0 1 3 14.543V13H1.75A1.75 1.75 0 0 1 0 11.25Zm1.75-.25a.25.25 0 0 0-.25.25v9.5c0 .138.112.25.25.25h2a.75.75 0 0 1 .75.75v2.19l2.72-2.72a.749.749 0 0 1 .53-.22h6.5a.25.25 0 0 0 .25-.25v-9.5a.25.25 0 0 0-.25-.25Zm7 2.25v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 9a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z" />
+      </svg>
+    )}
+    {normalizedType === 'warning' && (
+      <svg class="w-4 h-4 shrink-0 fill-current" viewBox="0 0 16 16" aria-hidden="true">
+        <path d="M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575Zm1.763.707a.25.25 0 0 0-.44 0L1.698 13.132a.25.25 0 0 0 .22.368h12.164a.25.25 0 0 0 .22-.368Zm.53 3.996v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z" />
+      </svg>
+    )}
+    {normalizedType === 'caution' && (
+      <svg class="w-4 h-4 shrink-0 fill-current" viewBox="0 0 16 16" aria-hidden="true">
+        <path d="M4.47.22A.749.749 0 0 1 5 0h6c.199 0 .389.079.53.22l4.25 4.25c.141.14.22.331.22.53v6a.749.749 0 0 1-.22.53l-4.25 4.25A.749.749 0 0 1 11 16H5a.749.749 0 0 1-.53-.22L.22 11.53A.749.749 0 0 1 0 11V5c0-.199.079-.389.22-.53Zm.84 1.28L1.5 5.31v5.38l3.81 3.81h5.38l3.81-3.81V5.31L10.69 1.5ZM8 4a.75.75 0 0 1 .75.75v3.5a.75.75 0 0 1-1.5 0v-3.5A.75.75 0 0 1 8 4Zm0 8a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z" />
+      </svg>
+    )}
+    <span>{displayTitle}</span>
+  </div>
+  <div class="mt-1.5 text-neutral-700 dark:text-neutral-300 [&>p]:my-1.5 [&>p:first-child]:mt-1 [&>p:last-child]:mb-0 [&>*:first-child]:mt-1 [&>*:last-child]:mb-0">
+    <slot />
+  </div>
+</aside>

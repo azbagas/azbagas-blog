@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+
+Sitemap: https://azbagas.com/sitemap-index.xml
