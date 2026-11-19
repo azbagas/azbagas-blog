@@ -12,6 +12,7 @@ import sitemap from '@astrojs/sitemap';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://azbagas.com',
+  trailingSlash: 'never',
   integrations: [
     mdx(),
     react(),
