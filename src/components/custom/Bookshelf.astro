@@ -12,6 +12,11 @@
     justify-content: space-between;
   }
 
+  .gr_grid_container.gr_grid_centered {
+    justify-content: center;
+    row-gap: 10px;
+  }
+
   .gr_grid_container br {
     display: none;
   }
@@ -51,4 +56,35 @@
   document.querySelectorAll('.gr_grid_book_container a').forEach((el) => {
     el.setAttribute('target', '_blank');
   });
+
+  const gridContainer = document.querySelector<HTMLElement>('.gr_grid_container');
+  if (gridContainer) {
+    const updateGridAlignment = () => {
+      const books = gridContainer.querySelectorAll('.gr_grid_book_container');
+      if (!books.length) return;
+      const bookWidth = 98;
+      const defaultGap = 5;
+      const containerWidth = gridContainer.clientWidth;
+      const itemsPerRow = Math.max(
+        1,
+        Math.floor((containerWidth + defaultGap) / (bookWidth + defaultGap))
+      );
+      const rows = Math.ceil(books.length / itemsPerRow);
+      const shouldCenter = rows > 1 && books.length % itemsPerRow !== 0;
+
+      gridContainer.classList.toggle('gr_grid_centered', shouldCenter);
+      if (shouldCenter && itemsPerRow > 1) {
+        const exactGap = Math.max(
+          defaultGap,
+          (containerWidth - itemsPerRow * bookWidth - 0.5) / (itemsPerRow - 1)
+        );
+        gridContainer.style.columnGap = `${exactGap}px`;
+      } else {
+        gridContainer.style.columnGap = '';
+      }
+    };
+
+    updateGridAlignment();
+    new ResizeObserver(updateGridAlignment).observe(gridContainer);
+  }
 </script>
