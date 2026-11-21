@@ -23,6 +23,7 @@ const {
 
 const site = Astro.site ?? new URL('https://azbagas.com');
 const canonicalURL = new URL(Astro.url.pathname, site);
+const isHomePage = Astro.url.pathname === '/';
 
 let ogImageUrl: string;
 if (!image) {
@@ -64,15 +65,17 @@ const basePersonSchema = {
   ],
 };
 
-const baseWebSiteSchema = {
-  '@type': 'WebSite',
-  '@id': 'https://azbagas.com/#website',
-  'url': 'https://azbagas.com',
-  'name': 'AzBagas',
-  'publisher': { '@id': 'https://azbagas.com/#person' },
-};
+const schemas: any[] = [basePersonSchema];
 
-const schemas: any[] = [basePersonSchema, baseWebSiteSchema];
+if (isHomePage) {
+  schemas.push({
+    '@type': 'WebSite',
+    '@id': 'https://azbagas.com/#website',
+    'url': new URL('/', site).toString(),
+    'name': 'AzBagas',
+    'publisher': { '@id': 'https://azbagas.com/#person' },
+  });
+}
 
 if (article && publishedDate) {
   schemas.push({
@@ -106,6 +109,7 @@ const jsonLd = {
 ---
 
 <!-- Global Metadata -->
+<meta name="application-name" content="AzBagas" />
 <meta name="description" content={description} />
 <meta name="author" content="Azhar Bagaskara" />
 <link rel="canonical" href={canonicalURL} />
